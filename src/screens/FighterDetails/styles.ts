@@ -8,7 +8,7 @@ export const Container = styled.View`
   height: 100%;
   background-color: ${Platform.OS === "android"
     ? theme.colors.white
-    : theme.colors.grey["500"]};
+    : theme.colors.grey["200"]};
 `;
 
 export const FighterImage = styled(FastImage)`

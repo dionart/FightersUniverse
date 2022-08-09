@@ -1,5 +1,5 @@
-import theme from '@/config';
-import styled from 'styled-components/native';
+import theme from "@/config";
+import styled from "styled-components/native";
 
 interface SliderItemProps {
   isSelected: boolean;
@@ -14,8 +14,8 @@ export const SliderItem = styled.TouchableOpacity<SliderItemProps>`
   align-items: center;
   min-width: 73px;
   padding: 14px;
-  background-color: ${({isSelected}) =>
-    isSelected ? theme.colors.blue['500'] : theme.colors.blue['200']};
+  background-color: ${({ isSelected }) =>
+    isSelected ? theme.colors.blue["500"] : theme.colors.blue["300"]};
   border-radius: 2px;
   margin-left: 10px;
 `;

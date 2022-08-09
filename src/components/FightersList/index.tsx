@@ -71,7 +71,7 @@ export const FightersList: React.FC<FightersListProps> = ({
   return (
     <Container>
       <FlatList
-        ListHeaderComponent={() => <Slider data={universe} />}
+        ListHeaderComponent={<Slider data={universe} />}
         refreshControl={
           <RefreshControl
             colors={[theme.colors.blue["200"]]}

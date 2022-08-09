@@ -1,15 +1,22 @@
 import { FightersList } from "@/components/FightersList";
+import { Header } from "@/components/Header";
 import Slider from "@/components/Slider";
+import { AppNavigatorParamList } from "@/navigators/AppNavigator/app-navigator-param-list";
 import { FighterService } from "@/services/FighterService";
 import { UniverseService } from "@/services/UniverseService";
+import { RootState } from "@/store";
+import { addFilter } from "@/store/app";
 import { Fighter } from "@/types/Fighter";
 import { Universe } from "@/types/Universe";
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React, { useEffect, useState } from "react";
-import { Alert } from "react-native";
+import { Alert, Platform } from "react-native";
 import {
   SafeAreaView,
   useSafeAreaInsets,
 } from "react-native-safe-area-context";
+import { useDispatch, useSelector } from "react-redux";
 
 import { Container } from "./styles";
 
@@ -17,7 +24,22 @@ export const Home: React.FC = () => {
   const [universe, setUniverse] = useState<Universe[]>([]);
   const [fighters, setFighters] = useState<Fighter[]>([]);
   const [loading, setLoading] = useState(false);
-  const { bottom } = useSafeAreaInsets();
+  const universeToFilter = useSelector(
+    (state: RootState) => state.app.universeToFilter
+  );
+  const navigation = useNavigation();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    Platform.OS === "ios" &&
+      navigation.setOptions({
+        header: ({
+          navigation,
+        }: NativeStackScreenProps<AppNavigatorParamList>) => (
+          <Header hasFilter canGoBack={false} navigation={navigation} />
+        ),
+      });
+  }, []);
 
   const getUniversesList = () => {
     setLoading(true);
@@ -41,7 +63,7 @@ export const Home: React.FC = () => {
     const fighterService = new FighterService();
 
     fighterService
-      .getFighters()
+      .getFighters(universeToFilter)
       .then((response) => {
         setFighters(response);
       })
@@ -61,7 +83,7 @@ export const Home: React.FC = () => {
   useEffect(() => {
     getUniversesList();
     getFightersList();
-  }, []);
+  }, [universeToFilter]);
 
   return (
     <SafeAreaView edges={["bottom"]}>

@@ -5,9 +5,12 @@ import { Onboarding } from "@/screens/Onboarding";
 import { NavigationContainer, RouteProp } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as React from "react";
-import { Platform, StatusBar } from "react-native";
+import { Platform, StatusBar, TouchableOpacity } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { AppNavigatorParamList } from "./app-navigator-param-list";
+import FilterSVG from "@/assets/images/filter.svg";
+import { Filters } from "@/screens/Filters";
+import { Header } from "@/components/Header";
 
 const Stack = createNativeStackNavigator();
 
@@ -15,7 +18,7 @@ type ScreenRouteProp = RouteProp<AppNavigatorParamList, "FighterDetails">;
 
 export const AppNavigator = () => {
   return (
-    <SafeAreaProvider>
+    <>
       <StatusBar
         backgroundColor={theme.colors.blue["100"]}
         barStyle={Platform.OS === "ios" ? "dark-content" : "light-content"}
@@ -41,10 +44,19 @@ export const AppNavigator = () => {
             component={Onboarding}
           />
           <Stack.Screen
-            options={{
-              headerBackVisible: false,
-              headerBackTitleVisible: false,
-              headerTitleAlign: "left",
+            options={({ navigation }) => {
+              return {
+                headerShown: true,
+                headerBackVisible: false,
+                headerBackTitleVisible: false,
+                headerRight: () => (
+                  <TouchableOpacity
+                    onPress={() => navigation.navigate("Filters")}
+                  >
+                    <FilterSVG />
+                  </TouchableOpacity>
+                ),
+              };
             }}
             name="Fighters"
             component={Home}
@@ -60,8 +72,16 @@ export const AppNavigator = () => {
             name="FighterDetails"
             component={FighterDetails}
           />
+          <Stack.Screen
+            options={{
+              headerBackTitleVisible: false,
+              headerTitleAlign: "left",
+            }}
+            name="Filters"
+            component={Filters}
+          />
         </Stack.Navigator>
       </NavigationContainer>
-    </SafeAreaProvider>
+    </>
   );
 };

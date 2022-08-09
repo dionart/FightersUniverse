@@ -3,17 +3,33 @@ import { Row } from "@/components/Row";
 import { Text } from "@/components/Text";
 import theme from "@/config";
 import { AppNavigatorParamList } from "@/navigators/AppNavigator/app-navigator-param-list";
-import { RouteProp, useRoute } from "@react-navigation/native";
-import React from "react";
+import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
+import React, { useEffect } from "react";
 import FastImage from "react-native-fast-image";
 
 import { Container, FighterImage, PriceTag } from "./styles";
 import { Rating } from "@/components/Rating";
+import { Platform } from "react-native";
+import { Header } from "@/components/Header";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
 type ScreenRouteProp = RouteProp<AppNavigatorParamList, "FighterDetails">;
 export const FighterDetails: React.FC = () => {
   const route = useRoute<ScreenRouteProp>();
+  const navigation = useNavigation();
   const { fighter } = route.params;
+
+  useEffect(() => {
+    Platform.OS === "ios" &&
+      navigation.setOptions({
+        header: ({
+          navigation,
+        }: NativeStackScreenProps<AppNavigatorParamList>) => (
+          <Header navigation={navigation} title={route.params.fighter.name} />
+        ),
+      });
+  }, []);
+
   return (
     <Container>
       <Row marginLeft={19} marginTop={40} spaceBetween>
