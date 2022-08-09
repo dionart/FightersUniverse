@@ -10,7 +10,7 @@ export class UniverseService {
   }
 
   public async getUniverses(): Promise<any> {
-    const response = await this.httpClient.get<any>("/universes");
+    const response = await this.httpClient.get<any>("universes");
     return response.data;
   }
 }

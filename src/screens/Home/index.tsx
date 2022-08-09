@@ -5,6 +5,7 @@ import { UniverseService } from "@/services/UniverseService";
 import { Fighter } from "@/types/Fighter";
 import { Universe } from "@/types/Universe";
 import React, { useEffect, useState } from "react";
+import { Alert } from "react-native";
 import {
   SafeAreaView,
   useSafeAreaInsets,
@@ -27,6 +28,9 @@ export const Home: React.FC = () => {
       .then((response) => {
         setUniverse(response);
       })
+      .catch((error) => {
+        Alert.alert("Error", error.message);
+      })
       .finally(() => {
         setLoading(false);
       });
@@ -40,6 +44,9 @@ export const Home: React.FC = () => {
       .getFighters()
       .then((response) => {
         setFighters(response);
+      })
+      .catch((error) => {
+        console.log(Object.entries(error));
       })
       .finally(() => {
         setLoading(false);

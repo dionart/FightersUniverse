@@ -6,9 +6,9 @@ import { AppNavigatorParamList } from "@/navigators/AppNavigator/app-navigator-p
 import { RouteProp, useRoute } from "@react-navigation/native";
 import React from "react";
 import FastImage from "react-native-fast-image";
-import StarSVG from "@/assets/images/star.svg";
 
 import { Container, FighterImage, PriceTag } from "./styles";
+import { Rating } from "@/components/Rating";
 
 type ScreenRouteProp = RouteProp<AppNavigatorParamList, "FighterDetails">;
 export const FighterDetails: React.FC = () => {
@@ -34,8 +34,9 @@ export const FighterDetails: React.FC = () => {
           >
             {fighter.universe}
           </Text>
+          <Rating disabled marginTop={24} rate={fighter.rate} />
           <Text
-            marginTop={24}
+            marginTop={5}
             weight="regular"
             size={14}
             color={theme.colors.grey["700"]}
@@ -43,7 +44,12 @@ export const FighterDetails: React.FC = () => {
             Downloads: {fighter.downloads}
           </Text>
           <PriceTag>
-            <Text color={theme.colors.white} weight="bold" size={24}>
+            <Text
+              lineHeight={28}
+              color={theme.colors.white}
+              weight="bold"
+              size={24}
+            >
               ${fighter.price}
             </Text>
           </PriceTag>

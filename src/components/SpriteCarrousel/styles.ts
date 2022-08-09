@@ -1,8 +1,8 @@
-import theme from '@/config';
-import {Dimensions} from 'react-native';
-import styled from 'styled-components/native';
+import theme from "@/config";
+import { Dimensions } from "react-native";
+import styled from "styled-components/native";
 
-const {width} = Dimensions.get('window');
+const { width } = Dimensions.get("window");
 
 interface PaginationItemProps {
   active?: boolean;
@@ -23,13 +23,13 @@ export const PaginationItem = styled.View<PaginationItemProps>`
   width: 8px;
   height: 8px;
   border-radius: 4px;
-  background-color: ${({active}) =>
-    active ? theme.colors.blue['500'] : '#fff'};
+  background-color: ${({ active }) =>
+    active ? theme.colors.blue["500"] : "#fff"};
   margin-left: 8px;
 `;
 
 export const SpriteItem = styled.View`
-  width: ${width};
+  width: ${width}px;
   align-items: center;
   justify-content: center;
 `;

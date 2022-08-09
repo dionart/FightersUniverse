@@ -43,8 +43,9 @@ export const SpriteCarrousel: React.FC<SpriteCarrouselProps> = ({ data }) => {
           marginTop={54}
           marginBottom={60}
           align="center"
-          color="#FFFF"
+          color={theme.colors.white}
           size={25}
+          lineHeight={30}
           weight="regular"
         >
           {item.title}
@@ -88,7 +89,13 @@ export const SpriteCarrousel: React.FC<SpriteCarrouselProps> = ({ data }) => {
       {activeIndex === data.length - 1 && (
         <Box marginTop={60} paddingLeft={38} paddingRight={38}>
           <Button onPress={handlePress}>
-            <Text color={theme.colors.blue["200"]}>Let's Go</Text>
+            <Text
+              color={theme.colors.blue["200"]}
+              weight="medium"
+              lineHeight={20}
+            >
+              Let's go
+            </Text>
           </Button>
         </Box>
       )}

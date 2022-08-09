@@ -1,10 +1,11 @@
+import theme from "@/config";
 import { AppNavigatorParamList } from "@/navigators/AppNavigator/app-navigator-param-list";
 import { Fighter } from "@/types/Fighter";
 import { Universe } from "@/types/Universe";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import React from "react";
-import { FlatList } from "react-native";
+import { FlatList, RefreshControl } from "react-native";
 import FastImage from "react-native-fast-image";
 import { Box } from "../Box";
 import Slider from "../Slider";
@@ -44,22 +45,22 @@ export const FightersList: React.FC<FightersListProps> = ({
             resizeMode={FastImage.resizeMode.contain}
           />
           <Box marginLeft={13}>
-            <Text weight="bold" size={16} color="#000">
+            <Text weight="bold" size={16} color={theme.colors.grey["900"]}>
               {item.name}
             </Text>
-            <Text color="#404040" size={14}>
+            <Text color={theme.colors.grey["700"]} size={14}>
               {item.universe}
             </Text>
           </Box>
         </Row>
         <Box>
-          <Text align="right" color="#404040" size={14}>
+          <Text align="right" color={theme.colors.grey["700"]} size={14}>
             Price: {item.price}
           </Text>
-          <Text align="right" color="#404040" size={14}>
+          <Text align="right" color={theme.colors.grey["700"]} size={14}>
             Rate: {item.rate}
           </Text>
-          <Text align="right" color="#404040" size={14}>
+          <Text align="right" color={theme.colors.grey["700"]} size={14}>
             Downloads: {item.downloads}
           </Text>
         </Box>
@@ -71,8 +72,14 @@ export const FightersList: React.FC<FightersListProps> = ({
     <Container>
       <FlatList
         ListHeaderComponent={() => <Slider data={universe} />}
-        onRefresh={onRefresh}
-        refreshing={loading}
+        refreshControl={
+          <RefreshControl
+            colors={[theme.colors.blue["200"]]}
+            tintColor={theme.colors.blue["200"]}
+            refreshing={loading}
+            onRefresh={onRefresh}
+          />
+        }
         data={fighters}
         renderItem={({ item }) => renderItem(item)}
       />

@@ -3,7 +3,7 @@ export type FontWeight = "regular" | "medium" | "bold";
 export const weight: Readonly<Record<FontWeight, string>> = {
   regular: "Roboto-Regular",
   medium: "Roboto-Medium",
-  bold: "Roboto-bold",
+  bold: "Roboto-Bold",
 };
 
 export const text = Object.freeze({

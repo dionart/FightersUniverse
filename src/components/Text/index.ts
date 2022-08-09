@@ -77,7 +77,7 @@ export const Text = styled.Text<TextProps>`
   margin-left: ${({ marginLeft = 0 }) => marginLeft}px;
   text-align: ${(props) => props.align || "auto"};
   font-family: ${({ weight = "medium" }) => theme.text.weight[weight]};
-  line-height: ${({ lineHeight = 0 }) => lineHeight}px;
+  line-height: ${({ lineHeight = 20 }) => lineHeight}px;
   /* font-weight: ${({ weight = 400 }) => weight}; */
 
   /* ${({ type }) => type && VariantStyles[type]} */
