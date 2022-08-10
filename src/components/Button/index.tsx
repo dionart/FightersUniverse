@@ -1,23 +1,32 @@
 import React from "react";
-import { ButtonProps, TouchableOpacityProps, ViewProps } from "react-native";
+import { StyleProp, TouchableOpacityProps, ViewStyle } from "react-native";
+import { Text, TextProps } from "../Text";
 
 import { Container } from "./styles";
 
 interface ButtonComponentProps extends TouchableOpacityProps {
-  children: React.ReactNode;
+  children: string;
   backgroundColor?: string;
   onPress?: () => void;
+  textProps?: TextProps;
+  style?: StyleProp<ViewStyle>;
 }
 
 const Button: React.FC<ButtonComponentProps> = ({
   children,
   backgroundColor,
   onPress,
+  textProps,
+  style,
   ...props
 }) => {
   return (
-    <Container {...props} onPress={onPress} backgroundColor={backgroundColor}>
-      {children}
+    <Container
+      style={style}
+      onPress={onPress}
+      backgroundColor={backgroundColor}
+    >
+      <Text {...textProps}>{children}</Text>
     </Container>
   );
 };

@@ -1,9 +1,9 @@
-import theme from "@/config";
+import theme from "@/config/theme";
 import { Platform } from "react-native";
 import FastImage from "react-native-fast-image";
 import styled from "styled-components/native";
 
-export const Container = styled.View`
+export const Container = styled.ScrollView`
   width: 100%;
   height: 100%;
   background-color: ${Platform.OS === "android"

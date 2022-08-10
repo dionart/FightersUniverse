@@ -7,13 +7,7 @@ interface OptionsContainerProps {
   center?: boolean;
 }
 
-export const Container = styled.View`
-  width: 100%;
-  height: 100%;
-  background-color: ${theme.colors.grey["200"]};
-`;
-
-export const OptionsContainer = styled.View<OptionsContainerProps & BoxProps>`
+export const Container = styled.View<OptionsContainerProps & BoxProps>`
   align-items: ${({ center }) => (center ? "center" : "flex-start")};
   background-color: ${theme.colors.white};
   border-top-color: ${theme.colors.grey["450"]};
@@ -23,7 +17,14 @@ export const OptionsContainer = styled.View<OptionsContainerProps & BoxProps>`
   ${(props) => applyBoxProps(props)}
 `;
 
-export const FilterItemLabel = styled.View<BoxProps>`
-  background-color: ${Platform.OS === "android" ? "white" : "transparent "};
-  ${(props) => applyBoxProps(props)}
+export const FilterItem = styled.View`
+  width: 100%;
+  flex-direction: ${Platform.OS === "ios" ? "row" : "row-reverse"};
+  align-items: center;
+  justify-content: ${Platform.OS === "ios" ? "space-between" : "flex-end"};
+  border-bottom-color: ${theme.colors.grey["450"]};
+  border-bottom-width: 0.5px;
+  padding-bottom: ${Platform.OS === "ios" ? "11px" : "21px"};
+  padding-top: ${Platform.OS === "ios" ? "11px" : "21px"};
+  padding-right: 20px;
 `;

@@ -1,10 +1,10 @@
-import theme from "@/config";
+import theme from "@/config/theme";
 import { AppNavigatorParamList } from "@/navigators/AppNavigator/app-navigator-param-list";
 import { Fighter } from "@/types/Fighter";
 import { Universe } from "@/types/Universe";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import React from "react";
+import React, { useCallback } from "react";
 import { FlatList, RefreshControl } from "react-native";
 import FastImage from "react-native-fast-image";
 import { Box } from "../Box";
@@ -80,21 +80,28 @@ export const FightersList: React.FC<FightersListProps> = ({
     </SliderContainer>
   );
 
+  const flatListOptimizationProps = {
+    initialNumToRender: 6,
+    removeClippedSubviews: true,
+    scrollEventThrottle: 16,
+    keyExtractor: useCallback((item: Universe) => item.name, []),
+  };
+
   return (
     <Container>
       <FlatList
         ListHeaderComponent={renderHeader()}
         refreshControl={
           <RefreshControl
-            colors={[theme.colors.blue["200"]]}
-            tintColor={theme.colors.blue["200"]}
+            colors={[theme.colors.grey["400"]]}
+            tintColor={theme.colors.grey["400"]}
             refreshing={loading}
             onRefresh={onRefresh}
           />
         }
         data={fighters}
         renderItem={({ item }) => renderItem(item)}
-        keyExtractor={(item) => item.name}
+        {...flatListOptimizationProps}
       />
     </Container>
   );

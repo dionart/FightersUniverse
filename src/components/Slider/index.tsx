@@ -1,3 +1,4 @@
+import theme from "@/config/theme";
 import { RootState } from "@/store";
 import { selectUniverse } from "@/store/app";
 import { Universe } from "@/types/Universe";
@@ -30,7 +31,7 @@ const Slider: React.FC<SliderProps> = ({ data }) => {
         isSelected={universeFilter === item.name}
         onPress={() => handlePress(item.name)}
       >
-        <Text size={14} color="#fff">
+        <Text size={14} color={theme.colors.white}>
           {item.name}
         </Text>
       </SliderItem>
@@ -40,7 +41,7 @@ const Slider: React.FC<SliderProps> = ({ data }) => {
   const renderHeader = () => {
     return (
       <SliderItem isSelected={!universeFilter} onPress={() => handlePress("")}>
-        <Text size={14} color="#fff">
+        <Text size={14} color={theme.colors.white}>
           All
         </Text>
       </SliderItem>

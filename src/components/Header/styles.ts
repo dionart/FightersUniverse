@@ -1,4 +1,4 @@
-import theme from "@/config";
+import theme from "@/config/theme";
 import styled from "styled-components/native";
 
 interface IconsContainer {
@@ -8,7 +8,7 @@ interface IconsContainer {
 export const Container = styled.View`
   width: 100%;
   background-color: ${theme.colors.white};
-  border-bottom-color: #c6c6c8;
+  border-bottom-color: ${theme.colors.grey["450"]};
   border-bottom-width: 0.5px;
   padding: 12px 20px 8px 12px;
 `;

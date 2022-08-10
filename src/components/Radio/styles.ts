@@ -1,4 +1,4 @@
-import theme from "@/config";
+import theme from "@/config/theme";
 import styled from "styled-components/native";
 
 interface ContainerProps {
@@ -13,11 +13,13 @@ export const Container = styled.TouchableOpacity<ContainerProps>`
   justify-content: center;
   border-radius: 15px;
   border: ${({ selected }) =>
-    selected ? "1px solid #007aff" : "1px solid #bfbfc1"};
+    selected
+      ? `1px solid ${theme.colors.secondary}`
+      : `1px solid ${theme.colors.grey["475"]}`};
 `;
 
 export const RadioFill = styled.View`
   padding: 6px;
-  background-color: #007aff;
+  background-color: ${theme.colors.secondary};
   border-radius: 15px;
 `;

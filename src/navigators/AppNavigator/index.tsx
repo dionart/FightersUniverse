@@ -1,41 +1,37 @@
-import theme from "@/config";
 import { FighterDetails } from "@/screens/FighterDetails";
 import { Home } from "@/screens/Home";
 import { Onboarding } from "@/screens/Onboarding";
-import { NavigationContainer, RouteProp } from "@react-navigation/native";
+import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as React from "react";
-import { Platform, StatusBar, TouchableOpacity } from "react-native";
-import { SafeAreaProvider } from "react-native-safe-area-context";
-import { AppNavigatorParamList } from "./app-navigator-param-list";
-import FilterSVG from "@/assets/images/filter.svg";
+import { Platform, StatusBar } from "react-native";
 import { Filters } from "@/screens/Filters";
-import { Header } from "@/components/Header";
+import { FilterIcon } from "@/components/FilterIcon";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store";
+import { AppNavigatorParamList } from "./app-navigator-param-list";
+import theme from "@/config/theme";
 
-const Stack = createNativeStackNavigator();
-
-type ScreenRouteProp = RouteProp<AppNavigatorParamList, "FighterDetails">;
+const Stack = createNativeStackNavigator<AppNavigatorParamList>();
 
 export const AppNavigator = () => {
+  const activeFilter = useSelector(
+    (state: RootState) => state.app.currentFilter
+  );
+
   return (
     <>
       <StatusBar
-        backgroundColor={theme.colors.blue["100"]}
+        backgroundColor={theme.colors.blue["400"]}
         barStyle={Platform.OS === "ios" ? "dark-content" : "light-content"}
       />
       <NavigationContainer>
         <Stack.Navigator
           screenOptions={{
             headerStyle: {
-              backgroundColor:
-                Platform.OS === "android"
-                  ? theme.colors.secondary
-                  : theme.colors.white,
+              backgroundColor: theme.colors.secondary,
             },
-            headerTintColor:
-              Platform.OS === "android"
-                ? theme.colors.white
-                : theme.colors.grey["900"],
+            headerTintColor: theme.colors.white,
           }}
         >
           <Stack.Screen
@@ -50,11 +46,12 @@ export const AppNavigator = () => {
                 headerBackVisible: false,
                 headerBackTitleVisible: false,
                 headerRight: () => (
-                  <TouchableOpacity
+                  <FilterIcon
                     onPress={() => navigation.navigate("Filters")}
-                  >
-                    <FilterSVG />
-                  </TouchableOpacity>
+                    fillColor={
+                      activeFilter ? theme.colors.primary : theme.colors.white
+                    }
+                  />
                 ),
               };
             }}
@@ -66,7 +63,7 @@ export const AppNavigator = () => {
               return {
                 headerBackTitleVisible: false,
                 headerTitleAlign: "left",
-                headerTitle: route.params && route?.params?.fighter.name,
+                headerTitle: route.params.fighter.name,
               };
             }}
             name="FighterDetails"

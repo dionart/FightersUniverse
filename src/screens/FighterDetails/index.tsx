@@ -1,7 +1,6 @@
 import { Box } from "@/components/Box";
 import { Row } from "@/components/Row";
 import { Text } from "@/components/Text";
-import theme from "@/config";
 import { AppNavigatorParamList } from "@/navigators/AppNavigator/app-navigator-param-list";
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import React, { useEffect } from "react";
@@ -12,6 +11,7 @@ import { Rating } from "@/components/Rating";
 import { Platform } from "react-native";
 import { Header } from "@/components/Header";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import theme from "@/config/theme";
 
 type ScreenRouteProp = RouteProp<AppNavigatorParamList, "FighterDetails">;
 export const FighterDetails: React.FC = () => {
@@ -78,7 +78,7 @@ export const FighterDetails: React.FC = () => {
           resizeMode={FastImage.resizeMode.contain}
         />
       </Row>
-      <Box marginTop={24} paddingLeft={16} paddingRight={16}>
+      <Box marginTop={24} paddingLeft={16} paddingRight={16} paddingBottom={24}>
         <Text
           color={theme.colors.grey["900"]}
           lineHeight={27}

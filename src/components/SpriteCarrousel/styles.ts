@@ -1,4 +1,4 @@
-import theme from "@/config";
+import theme from "@/config/theme";
 import { Dimensions } from "react-native";
 import styled from "styled-components/native";
 
@@ -24,7 +24,7 @@ export const PaginationItem = styled.View<PaginationItemProps>`
   height: 8px;
   border-radius: 4px;
   background-color: ${({ active }) =>
-    active ? theme.colors.blue["500"] : "#fff"};
+    active ? theme.colors.blue["500"] : theme.colors.white};
   margin-left: 8px;
 `;
 

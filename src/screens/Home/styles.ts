@@ -1,4 +1,4 @@
-import theme from "@/config";
+import theme from "@/config/theme";
 import { Platform } from "react-native";
 import styled from "styled-components/native";
 

@@ -1,7 +1,7 @@
 import { Platform } from "react-native";
 import styled from "styled-components/native";
 import FastImage from "react-native-fast-image";
-import theme from "@/config";
+import theme from "@/config/theme";
 
 export const Container = styled.View`
   width: 100%;
@@ -15,7 +15,7 @@ export const FighterItem = styled.TouchableOpacity`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  border-bottom-color: #e6e6e6;
+  border-bottom-color: ${theme.colors.grey["350"]};
   border-bottom-width: 1px;
 `;
 

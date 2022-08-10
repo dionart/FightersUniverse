@@ -1,4 +1,4 @@
-import theme from "@/config";
+import theme from "@/config/theme";
 import styled from "styled-components/native";
 
 interface SliderItemProps {
@@ -15,7 +15,7 @@ export const SliderItem = styled.TouchableOpacity<SliderItemProps>`
   min-width: 73px;
   padding: 14px;
   background-color: ${({ isSelected }) =>
-    isSelected ? theme.colors.blue["500"] : theme.colors.blue["300"]};
+    isSelected ? theme.colors.blue["500"] : theme.colors.secondary};
   border-radius: 2px;
   margin-left: 10px;
 `;

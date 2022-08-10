@@ -1,4 +1,4 @@
-import theme from "@/config";
+import theme from "@/config/theme";
 import { AppNavigatorParamList } from "@/navigators/AppNavigator/app-navigator-param-list";
 import { SpriteType } from "@/screens/Onboarding";
 import { useNavigation } from "@react-navigation/native";
@@ -89,14 +89,15 @@ export const SpriteCarrousel: React.FC<SpriteCarrouselProps> = ({ data }) => {
       </PaginationContainer>
       {activeIndex === data.length - 1 && (
         <Box marginTop={60} paddingLeft={38} paddingRight={38}>
-          <Button onPress={handlePress}>
-            <Text
-              color={theme.colors.blue["200"]}
-              weight="medium"
-              lineHeight={20}
-            >
-              Let's go
-            </Text>
+          <Button
+            textProps={{
+              color: theme.colors.blue["100"],
+              weight: "medium",
+              lineHeight: 20,
+            }}
+            onPress={handlePress}
+          >
+            Let's go
           </Button>
         </Box>
       )}

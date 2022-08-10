@@ -1,6 +1,5 @@
 import { FightersList } from "@/components/FightersList";
 import { Header } from "@/components/Header";
-import Slider from "@/components/Slider";
 import { AppNavigatorParamList } from "@/navigators/AppNavigator/app-navigator-param-list";
 import { FighterService } from "@/services/FighterService";
 import { UniverseService } from "@/services/UniverseService";
@@ -9,13 +8,10 @@ import { Fighter } from "@/types/Fighter";
 import { Universe } from "@/types/Universe";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { Alert, Platform } from "react-native";
-import {
-  SafeAreaView,
-  useSafeAreaInsets,
-} from "react-native-safe-area-context";
-import { useDispatch, useSelector } from "react-redux";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { useSelector } from "react-redux";
 
 import { Container } from "./styles";
 
@@ -23,11 +19,41 @@ export const Home: React.FC = () => {
   const [universe, setUniverse] = useState<Universe[]>([]);
   const [fighters, setFighters] = useState<Fighter[]>([]);
   const [loading, setLoading] = useState(false);
-  const universeToFilter = useSelector(
-    (state: RootState) => state.app.selectedUniverse
+  const { selectedUniverse, currentFilter, rateFilterValue } = useSelector(
+    (state: RootState) => state.app
   );
   const navigation = useNavigation();
-  const dispatch = useDispatch();
+
+  const filteredData = useMemo(() => {
+    let filteredValidFighters = fighters.filter((fighter) => {
+      return fighter.objectID !== "NaN";
+    });
+
+    if (rateFilterValue) {
+      filteredValidFighters = filteredValidFighters.filter((fighter) => {
+        return fighter.rate === rateFilterValue;
+      });
+    }
+
+    if (currentFilter === "") {
+      return filteredValidFighters;
+    }
+
+    return filteredValidFighters.sort((a, b) => {
+      let formattedA = a[currentFilter as keyof Fighter];
+      let formattedB = b[currentFilter as keyof Fighter];
+
+      if (Number(formattedA)) {
+        formattedA = Number(formattedA);
+      }
+
+      if (Number(formattedB)) {
+        formattedB = Number(formattedB);
+      }
+
+      return formattedA == formattedB ? 0 : formattedA > formattedB ? 1 : -1;
+    });
+  }, [fighters, currentFilter, rateFilterValue]);
 
   useEffect(() => {
     Platform.OS === "ios" &&
@@ -38,7 +64,7 @@ export const Home: React.FC = () => {
           <Header hasFilter canGoBack={false} navigation={navigation} />
         ),
       });
-  }, []);
+  }, [rateFilterValue]);
 
   const getUniversesList = () => {
     setLoading(true);
@@ -62,7 +88,7 @@ export const Home: React.FC = () => {
     const fighterService = new FighterService();
 
     fighterService
-      .getFighters(universeToFilter)
+      .getFighters(selectedUniverse)
       .then((response) => {
         setFighters(response);
       })
@@ -82,7 +108,7 @@ export const Home: React.FC = () => {
   useEffect(() => {
     getUniversesList();
     getFightersList();
-  }, [universeToFilter]);
+  }, [selectedUniverse]);
 
   return (
     <SafeAreaView edges={["bottom"]}>
@@ -91,7 +117,7 @@ export const Home: React.FC = () => {
           universe={universe}
           loading={loading}
           onRefresh={handleRefresh}
-          fighters={fighters}
+          fighters={filteredData}
         />
       </Container>
     </SafeAreaView>
