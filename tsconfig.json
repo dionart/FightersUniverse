@@ -10,6 +10,12 @@
       "@/*": ["src/*"]
     },
     "types": ["styled-components-react-native"],
+    "plugins": [{
+      "name": "typescript-styled-plugin",
+      "lint": {
+        "validProperties": ["elevation"]
+      }
+    }]
   },
   "skipLibCheck": true,
 }

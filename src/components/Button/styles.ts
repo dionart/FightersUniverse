@@ -1,4 +1,5 @@
-import styled from 'styled-components/native';
+import { Platform } from "react-native";
+import styled, { css } from "styled-components/native";
 
 interface ButtonContainerProps {
   backgroundColor?: string;
@@ -6,8 +7,9 @@ interface ButtonContainerProps {
 
 export const Container = styled.TouchableOpacity<ButtonContainerProps>`
   width: 100%;
-  background-color: ${({backgroundColor = '#FFF'}) => backgroundColor};
+  background-color: ${({ backgroundColor = "#FFF" }) => backgroundColor};
   padding: 14px 0;
-  border-radius: 22px;
+  border-radius: ${Platform.OS === "ios" ? 22 : 6}px;
   align-items: center;
+  elevation: 3;
 `;

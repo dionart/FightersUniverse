@@ -8,9 +8,8 @@ interface IconsContainer {
 export const Container = styled.View`
   width: 100%;
   background-color: ${theme.colors.white};
-  /* height: 96px; */
   border-bottom-color: #c6c6c8;
-  border-bottom-width: 1px;
+  border-bottom-width: 0.5px;
   padding: 12px 20px 8px 12px;
 `;
 

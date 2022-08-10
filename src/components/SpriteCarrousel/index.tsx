@@ -80,6 +80,7 @@ export const SpriteCarrousel: React.FC<SpriteCarrouselProps> = ({ data }) => {
         pagingEnabled
         showsHorizontalScrollIndicator={false}
         renderItem={({ item }) => renderItem(item)}
+        keyExtractor={(item) => item.title}
       />
       <PaginationContainer>
         {data.map((_, index: number) => (

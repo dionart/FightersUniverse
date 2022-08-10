@@ -1,5 +1,5 @@
 import { RootState } from "@/store";
-import { addFilter, selectUniverse } from "@/store/app";
+import { selectUniverse } from "@/store/app";
 import { Universe } from "@/types/Universe";
 import React, { useCallback } from "react";
 import { FlatList } from "react-native";
@@ -15,7 +15,7 @@ interface SliderProps {
 const Slider: React.FC<SliderProps> = ({ data }) => {
   const dispatch = useDispatch();
   const universeFilter = useSelector(
-    (state: RootState) => state.app.universeToFilter
+    (state: RootState) => state.app.selectedUniverse
   );
 
   const handlePress = (universeName: string) => {

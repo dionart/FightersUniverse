@@ -1,17 +1,26 @@
 import Svg, { Path } from "react-native-svg";
 import React from "react";
 import { TouchableOpacity } from "react-native";
+import { Container } from "./styles";
 
 interface StarProps {
   filled: boolean;
   disabled?: boolean;
-  onPress?: (value: number | null) => void;
+  size?: number;
+  space?: number;
+  onPress?: () => void;
 }
 
-export const Star: React.FC<StarProps> = ({ filled, onPress, disabled }) => {
+export const Star: React.FC<StarProps> = ({
+  filled,
+  onPress,
+  disabled,
+  size = 16,
+  space = 0,
+}) => {
   return (
-    <TouchableOpacity disabled={disabled}>
-      <Svg width="16" height="16" viewBox="0 0 38 38" fill="none">
+    <Container onPress={onPress} space={space} disabled={disabled}>
+      <Svg width={size} height={size} viewBox="0 0 38 38" fill="none">
         <Path
           fill-rule="evenodd"
           clip-rule="evenodd"
@@ -19,6 +28,6 @@ export const Star: React.FC<StarProps> = ({ filled, onPress, disabled }) => {
           fill={filled ? "#FFCD00" : "#979797"}
         />
       </Svg>
-    </TouchableOpacity>
+    </Container>
   );
 };

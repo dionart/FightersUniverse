@@ -22,7 +22,6 @@ export const Header: React.FC<HeaderProps> = ({
   canGoBack = true,
   hasFilter = false,
 }) => {
-  console.log(navigation);
   return (
     <SafeAreaView style={{ backgroundColor: "white" }} edges={["top"]}>
       <Container>

@@ -11,7 +11,13 @@ import { Box } from "../Box";
 import Slider from "../Slider";
 import { Text } from "../Text";
 
-import { Container, FighterImage, FighterItem, Row } from "./styles";
+import {
+  Container,
+  FighterImage,
+  FighterItem,
+  Row,
+  SliderContainer,
+} from "./styles";
 
 interface FightersListProps {
   universe: Universe[];
@@ -68,10 +74,16 @@ export const FightersList: React.FC<FightersListProps> = ({
     );
   };
 
+  const renderHeader = () => (
+    <SliderContainer>
+      <Slider data={universe} />
+    </SliderContainer>
+  );
+
   return (
     <Container>
       <FlatList
-        ListHeaderComponent={<Slider data={universe} />}
+        ListHeaderComponent={renderHeader()}
         refreshControl={
           <RefreshControl
             colors={[theme.colors.blue["200"]]}
@@ -82,6 +94,7 @@ export const FightersList: React.FC<FightersListProps> = ({
         }
         data={fighters}
         renderItem={({ item }) => renderItem(item)}
+        keyExtractor={(item) => item.name}
       />
     </Container>
   );

@@ -28,3 +28,8 @@ export const Row = styled.View`
   flex-direction: row;
   align-items: center;
 `;
+
+export const SliderContainer = styled.View`
+  padding: 17px 0 12px 12px;
+  background-color: ${theme.colors.white};
+`;

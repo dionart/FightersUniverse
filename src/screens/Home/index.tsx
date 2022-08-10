@@ -5,7 +5,6 @@ import { AppNavigatorParamList } from "@/navigators/AppNavigator/app-navigator-p
 import { FighterService } from "@/services/FighterService";
 import { UniverseService } from "@/services/UniverseService";
 import { RootState } from "@/store";
-import { addFilter } from "@/store/app";
 import { Fighter } from "@/types/Fighter";
 import { Universe } from "@/types/Universe";
 import { useNavigation } from "@react-navigation/native";
@@ -25,7 +24,7 @@ export const Home: React.FC = () => {
   const [fighters, setFighters] = useState<Fighter[]>([]);
   const [loading, setLoading] = useState(false);
   const universeToFilter = useSelector(
-    (state: RootState) => state.app.universeToFilter
+    (state: RootState) => state.app.selectedUniverse
   );
   const navigation = useNavigation();
   const dispatch = useDispatch();

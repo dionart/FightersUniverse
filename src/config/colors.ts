@@ -22,6 +22,7 @@ const grey = Object.freeze({
   ["500"]: "#E5E5E5",
   ["200"]: "#F0F0F6",
   ["100"]: "#FAFAFA",
+  ["50"]: "#DADADA",
   ["0"]: "#FFFFFF",
 });
 
@@ -29,6 +30,7 @@ export const colors = Object.freeze({
   primary: "#003C7E",
   secondary: "#007AFF",
   white: "#FFFFFF",
+  text: "#595959",
 
   yellow,
   blue,
