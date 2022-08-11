@@ -2,6 +2,7 @@ import Svg, { Path } from "react-native-svg";
 import React from "react";
 import { TouchableOpacity } from "react-native";
 import theme from "@/config/theme";
+import { Container } from "./styles";
 
 interface FilterIconProps {
   fillColor?: string;
@@ -13,7 +14,7 @@ export const FilterIcon: React.FC<FilterIconProps> = ({
   onPress,
 }) => {
   return (
-    <TouchableOpacity onPress={onPress}>
+    <Container onPress={onPress}>
       <Svg width="21" height="21" viewBox="0 0 21 14" fill="none">
         <Path
           fill-rule="evenodd"
@@ -22,6 +23,6 @@ export const FilterIcon: React.FC<FilterIconProps> = ({
           fill={fillColor}
         />
       </Svg>
-    </TouchableOpacity>
+    </Container>
   );
 };
