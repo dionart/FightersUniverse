@@ -19,7 +19,7 @@ export const FighterImage = styled(FastImage)`
 `;
 
 export const PriceTag = styled.View`
-  width: ${s(84)}px;
+  align-self: flex-start;
   padding: 6px 14px;
   background-color: ${theme.colors.blue["200"]};
   border-radius: ${s(7)}px;
