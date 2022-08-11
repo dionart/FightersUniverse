@@ -1,5 +1,5 @@
+import { DetectPlatform } from "@/utils/detect-platform";
 import React from "react";
-import { Platform, View } from "react-native";
 import { Radio } from "../Radio";
 import { Text } from "../Text";
 
@@ -22,7 +22,7 @@ export const FilterOptions: React.FC<FilterOptionsProps> = ({
         <FilterItem key={index}>
           <Text
             textTransform="capitalize"
-            marginLeft={Platform.OS === "android" ? 26 : 0}
+            marginLeft={DetectPlatform(0, 26)}
             size={17}
             lineHeight={22}
             weight="regular"

@@ -1,20 +1,23 @@
-import { Box } from "@/components/Box";
-import { Header } from "@/components/Header";
-import { Rating } from "@/components/Rating";
-import { Text } from "@/components/Text";
-import { FilterOptions } from "@/components/FilterOptions";
 import { setCurrentFilter, setRateFilterValue } from "@/store/app";
 import { AppNavigatorParamList } from "@/navigators/AppNavigator/app-navigator-param-list";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React, { useEffect, useState } from "react";
-import { Platform, SafeAreaView } from "react-native";
+import { Platform, SafeAreaView, ScrollView, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { Container, FilterItemLabel, OptionsContainer } from "./styles";
 import { RootState } from "@/store";
-import { FilterButtons } from "@/components/FilterButtons";
 import { filterOptions } from "@/constants/filter-options";
 import theme from "@/config/theme";
+import { DetectPlatform } from "@/utils/detect-platform";
+import {
+  Box,
+  FilterButtons,
+  FilterOptions,
+  Header,
+  Rating,
+  Text,
+} from "@/components";
 
 export const Filters: React.FC = () => {
   const navigation = useNavigation();
@@ -57,52 +60,54 @@ export const Filters: React.FC = () => {
   return (
     <SafeAreaView>
       <Container>
-        <FilterItemLabel>
-          <Text
-            marginTop={14}
-            marginLeft={20}
-            marginBottom={10}
-            color={theme.colors.grey["600"]}
-            size={Platform.OS === "ios" ? 13 : 14}
-            lineHeight={18}
-            textTransform={Platform.OS === "ios" ? "uppercase" : "none"}
-            weight={Platform.OS === "ios" ? "regular" : "medium"}
-          >
-            Sort by
-          </Text>
-        </FilterItemLabel>
-        <FilterOptions
-          options={filterOptions}
-          selectedFilter={selectedFilter}
-          onSelect={setSelectedFilter}
-        />
-        <FilterItemLabel marginTop={Platform.OS === "android" ? 16 : 0}>
-          <Text
-            marginTop={14}
-            marginLeft={20}
-            marginBottom={10}
-            color={theme.colors.grey["600"]}
-            size={Platform.OS === "ios" ? 13 : 14}
-            lineHeight={18}
-            textTransform={Platform.OS === "ios" ? "uppercase" : "none"}
-            weight={Platform.OS === "ios" ? "regular" : "medium"}
-          >
-            Filter by
-          </Text>
-        </FilterItemLabel>
-        <Box style={{ flex: 1 }}>
-          <OptionsContainer paddingTop={30} paddingBottom={30} center>
-            <Rating
-              onPress={(teste) => {
-                setRate(teste);
-              }}
-              spaceBetweenStars={16}
-              size={38}
-              rate={rate}
-            />
-          </OptionsContainer>
-        </Box>
-        <FilterButtons onClear={handleClear} onFilter={handleFilter} />
+        <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+          <FilterItemLabel>
+            <Text
+              marginTop={14}
+              marginLeft={20}
+              marginBottom={10}
+              color={theme.colors.grey["600"]}
+              size={DetectPlatform(13, 14)}
+              lineHeight={18}
+              textTransform={DetectPlatform("uppercase", "none")}
+              weight={DetectPlatform("regular", "medium")}
+            >
+              Sort by
+            </Text>
+          </FilterItemLabel>
+          <FilterOptions
+            options={filterOptions}
+            selectedFilter={selectedFilter}
+            onSelect={setSelectedFilter}
+          />
+          <FilterItemLabel marginTop={DetectPlatform(0, 16)}>
+            <Text
+              marginTop={14}
+              marginLeft={20}
+              marginBottom={10}
+              color={theme.colors.grey["600"]}
+              size={DetectPlatform(13, 14)}
+              lineHeight={18}
+              textTransform={DetectPlatform("uppercase", "none")}
+              weight={DetectPlatform("regular", "medium")}
+            >
+              Filter by
+            </Text>
+          </FilterItemLabel>
+          <Box style={{ flexGrow: 1 }}>
+            <OptionsContainer paddingTop={30} paddingBottom={30} center>
+              <Rating
+                onPress={setRate}
+                spaceBetweenStars={16}
+                size={38}
+                rate={rate}
+              />
+            </OptionsContainer>
+          </Box>
+          <Box paddingTop={16} paddingBottom={24}>
+            <FilterButtons onClear={handleClear} onFilter={handleFilter} />
+          </Box>
+        </ScrollView>
       </Container>
     </SafeAreaView>
   );

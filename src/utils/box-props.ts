@@ -1,3 +1,5 @@
+import { scale } from "react-native-size-matters";
+
 export type BoxProps = {
   marginTop?: number;
   marginBottom?: number;
@@ -12,29 +14,29 @@ export type BoxProps = {
   padding?: number;
 };
 
-const propsMap: {[key: string]: string} = {
-  marginTop: 'margin-top',
-  marginBottom: 'margin-bottom',
-  marginLeft: 'margin-left',
-  marginRight: 'margin-right',
-  margin: 'margin',
+const propsMap: { [key: string]: string } = {
+  marginTop: "margin-top",
+  marginBottom: "margin-bottom",
+  marginLeft: "margin-left",
+  marginRight: "margin-right",
+  margin: "margin",
 
-  paddingTop: 'padding-top',
-  paddingBottom: 'padding-bottom',
-  paddingLeft: 'padding-left',
-  paddingRight: 'padding-right',
-  padding: 'padding',
+  paddingTop: "padding-top",
+  paddingBottom: "padding-bottom",
+  paddingLeft: "padding-left",
+  paddingRight: "padding-right",
+  padding: "padding",
 };
 
 export function applyBoxProps(props: BoxProps): string {
   return Object.keys(props)
-    .map(key => {
+    .map((key) => {
       // @ts-ignore
       const value = props[key];
       if (value === undefined) {
-        return '';
+        return "";
       }
-      return `${propsMap[key]}: ${value}px;`;
+      return `${propsMap[key]}: ${scale(value)}px;`;
     })
-    .join(' ');
+    .join(" ");
 }

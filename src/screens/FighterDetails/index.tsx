@@ -1,17 +1,13 @@
-import { Box } from "@/components/Box";
-import { Row } from "@/components/Row";
-import { Text } from "@/components/Text";
 import { AppNavigatorParamList } from "@/navigators/AppNavigator/app-navigator-param-list";
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import React, { useEffect } from "react";
 import FastImage from "react-native-fast-image";
 
 import { Container, FighterImage, PriceTag } from "./styles";
-import { Rating } from "@/components/Rating";
 import { Platform } from "react-native";
-import { Header } from "@/components/Header";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import theme from "@/config/theme";
+import { Box, Header, Rating, Row, Text } from "@/components";
 
 type ScreenRouteProp = RouteProp<AppNavigatorParamList, "FighterDetails">;
 export const FighterDetails: React.FC = () => {
@@ -32,7 +28,7 @@ export const FighterDetails: React.FC = () => {
 
   return (
     <Container>
-      <Row marginLeft={19} marginTop={40} spaceBetween>
+      <Row marginTop={40} marginLeft={19}>
         <Box>
           <Text
             lineHeight={24}

@@ -1,8 +1,8 @@
 import React from "react";
-import { Platform } from "react-native";
 
 import { Container, RadioFill } from "./styles";
 import CheckSVG from "@/assets/images/check.svg";
+import { DetectPlatform } from "@/utils/detect-platform";
 
 interface RadioProps {
   selected: boolean;
@@ -12,8 +12,7 @@ interface RadioProps {
 export const Radio: React.FC<RadioProps> = ({ selected, onSelect }) => {
   return (
     <Container onPress={onSelect} selected={selected}>
-      {selected && Platform.OS === "ios" && <CheckSVG />}
-      {selected && Platform.OS === "android" && <RadioFill />}
+      {selected && DetectPlatform(<CheckSVG />, <RadioFill />)}
     </Container>
   );
 };

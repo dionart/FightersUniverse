@@ -3,6 +3,8 @@ package com.fightersuniverse;
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
 import com.facebook.react.ReactRootView;
+import org.devio.rn.splashscreen.SplashScreen; // Adicione esse import
+import android.os.Bundle; // Adicione esse import
 
 public class MainActivity extends ReactActivity {
 
@@ -14,6 +16,12 @@ public class MainActivity extends ReactActivity {
   protected String getMainComponentName() {
     return "FightersUniverse";
   }
+
+  @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        SplashScreen.show(this);
+        super.onCreate(savedInstanceState);
+    }
 
   /**
    * Returns the instance of the {@link ReactActivityDelegate}. There the RootView is created and

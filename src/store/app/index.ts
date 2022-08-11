@@ -1,23 +1,25 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { Fighter } from "@/types/Fighter";
-import { Universe } from "@/types/Universe";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { RootState } from "..";
 
 export interface AppState {
-  universes: Universe[];
-  fighters: Fighter[];
   currentFilter: string;
   rateFilterValue: number;
   selectedUniverse: string;
+  hasSeenOnboarding: boolean;
 }
 
 const initialState: AppState = {
-  universes: [],
-  fighters: [],
   currentFilter: "",
   rateFilterValue: 0,
   selectedUniverse: "",
+  hasSeenOnboarding: false,
 };
+
+export const initialize = createAsyncThunk("app/initialize", async () => {
+  return await AsyncStorage.getItem("@onboarding");
+});
 
 export const appSlice = createSlice({
   name: "app",
@@ -32,10 +34,28 @@ export const appSlice = createSlice({
     setRateFilterValue: (state, action: PayloadAction<number>) => {
       state.rateFilterValue = action.payload;
     },
+    initializeOnboarding: (state) => {
+      AsyncStorage.setItem("@onboarding", "true");
+      state.hasSeenOnboarding = true;
+    },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(initialize.fulfilled, (state, action) => {
+      if (action.payload) {
+        state.hasSeenOnboarding = Boolean(action.payload);
+      }
+    });
   },
 });
 
-export const { selectUniverse, setCurrentFilter, setRateFilterValue } =
-  appSlice.actions;
+export const {
+  selectUniverse,
+  setCurrentFilter,
+  setRateFilterValue,
+  initializeOnboarding,
+} = appSlice.actions;
+
+export const selectInitializedAuth = (state: RootState) =>
+  state.app.hasSeenOnboarding;
 
 export default appSlice.reducer;

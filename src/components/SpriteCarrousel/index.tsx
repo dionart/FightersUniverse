@@ -1,43 +1,45 @@
 import theme from "@/config/theme";
-import { AppNavigatorParamList } from "@/navigators/AppNavigator/app-navigator-param-list";
-import { SpriteType } from "@/screens/Onboarding";
-import { useNavigation } from "@react-navigation/native";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import React, { useCallback, useRef, useState } from "react";
 import {
   FlatList,
   NativeScrollEvent,
   NativeSyntheticEvent,
 } from "react-native";
-import { Box } from "../Box";
-import Button from "../Button";
-import { Text } from "../Text";
+import ChevronSVG from "@/assets/images/chevron.svg";
 import {
   Container,
   PaginationContainer,
   PaginationItem,
+  RoundedButton,
+  SpriteImageContainer,
   SpriteItem,
   TextContainer,
 } from "./styles";
+import { DetectPlatform } from "@/utils/detect-platform";
+import { Box } from "../Box";
+import { Button } from "../Button";
+import { Text } from "../Text";
+import { Sprite } from "@/types";
+import { initializeOnboarding } from "@/store/app";
+import { useDispatch } from "react-redux";
 
 interface SpriteCarrouselProps {
-  data: SpriteType[];
+  data: Sprite[];
 }
 
 export const SpriteCarrousel: React.FC<SpriteCarrouselProps> = ({ data }) => {
   const [activeIndex, setActiveIndex] = useState(0);
-  const navigation =
-    useNavigation<NativeStackNavigationProp<AppNavigatorParamList>>();
   const indexRef = useRef(activeIndex);
+  const dispatch = useDispatch();
   indexRef.current = activeIndex;
 
-  const handlePress = () => {
-    navigation.navigate("Fighters");
+  const handlePress = async () => {
+    dispatch(initializeOnboarding());
   };
 
-  const renderItem = (item: SpriteType) => (
+  const renderItem = (item: Sprite) => (
     <SpriteItem>
-      {item.image}
+      <SpriteImageContainer>{item.image}</SpriteImageContainer>
       <TextContainer>
         <Text
           marginTop={54}
@@ -84,23 +86,28 @@ export const SpriteCarrousel: React.FC<SpriteCarrouselProps> = ({ data }) => {
       />
       <PaginationContainer>
         {data.map((_, index: number) => (
-          <PaginationItem active={activeIndex === index} />
+          <PaginationItem key={index} active={activeIndex === index} />
         ))}
       </PaginationContainer>
-      {activeIndex === data.length - 1 && (
-        <Box marginTop={60} paddingLeft={38} paddingRight={38}>
-          <Button
-            textProps={{
-              color: theme.colors.blue["100"],
-              weight: "medium",
-              lineHeight: 20,
-            }}
-            onPress={handlePress}
-          >
-            Let's go
-          </Button>
-        </Box>
-      )}
+
+      {activeIndex === data.length - 1 &&
+        DetectPlatform(
+          <Box marginTop={60} paddingLeft={38} paddingRight={38}>
+            <Button
+              textProps={{
+                color: theme.colors.blue["100"],
+                weight: "medium",
+                lineHeight: 20,
+              }}
+              onPress={handlePress}
+            >
+              Let's go
+            </Button>
+          </Box>,
+          <RoundedButton onPress={handlePress}>
+            <ChevronSVG />
+          </RoundedButton>
+        )}
     </Container>
   );
 };

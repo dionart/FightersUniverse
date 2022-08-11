@@ -1,6 +1,6 @@
 import axios, { AxiosInstance } from "axios";
 import { API_URL } from "react-native-dotenv";
-console.log(API_URL);
+
 export class FighterService {
   private readonly httpClient: AxiosInstance;
 

@@ -1,7 +1,7 @@
 import theme from "@/config/theme";
 import { BoxProps, applyBoxProps } from "@/utils/box-props";
-import { Platform } from "react-native";
 import styled from "styled-components/native";
+import { DetectPlatform } from "@/utils/detect-platform";
 
 interface OptionsContainerProps {
   center?: boolean;
@@ -17,13 +17,13 @@ export const OptionsContainer = styled.View<OptionsContainerProps & BoxProps>`
   align-items: ${({ center }) => (center ? "center" : "flex-start")};
   background-color: ${theme.colors.white};
   border-top-color: ${theme.colors.grey["450"]};
-  border-top-width: ${Platform.OS === "ios" ? 0.5 : 0}px;
+  border-top-width: ${DetectPlatform(0.5, 0)}px;
   border-bottom-color: ${theme.colors.grey["450"]};
-  border-bottom-width: ${Platform.OS === "android" ? 0.5 : 0}px;
+  border-bottom-width: ${DetectPlatform(0, 0.5)}px;
   ${(props) => applyBoxProps(props)}
 `;
 
 export const FilterItemLabel = styled.View<BoxProps>`
-  background-color: ${Platform.OS === "android" ? "white" : "transparent "};
+  background-color: ${DetectPlatform("transparent", "white")};
   ${(props) => applyBoxProps(props)}
 `;

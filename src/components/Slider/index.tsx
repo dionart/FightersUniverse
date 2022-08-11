@@ -13,7 +13,7 @@ interface SliderProps {
   data: Universe[];
 }
 
-const Slider: React.FC<SliderProps> = ({ data }) => {
+export const Slider: React.FC<SliderProps> = ({ data }) => {
   const dispatch = useDispatch();
   const universeFilter = useSelector(
     (state: RootState) => state.app.selectedUniverse
@@ -59,14 +59,14 @@ const Slider: React.FC<SliderProps> = ({ data }) => {
 
   return (
     <Container>
-      <FlatList
-        ListHeaderComponent={data && renderHeader()}
-        data={data}
-        renderItem={({ item }) => renderItem(item)}
-        {...flatListOptimizationProps}
-      />
+      {data.length !== 0 && (
+        <FlatList
+          ListHeaderComponent={renderHeader()}
+          data={data}
+          renderItem={({ item }) => renderItem(item)}
+          {...flatListOptimizationProps}
+        />
+      )}
     </Container>
   );
 };
-
-export default Slider;

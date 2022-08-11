@@ -1,13 +1,14 @@
 import theme from "@/config/theme";
 import styled from "styled-components/native";
+import { s } from "react-native-size-matters";
 
 interface ContainerProps {
   selected?: boolean;
 }
 
 export const Container = styled.TouchableOpacity<ContainerProps>`
-  width: 20px;
-  height: 20px;
+  width: ${s(20)}px;
+  height: ${s(20)}px;
   padding: 10px;
   align-items: center;
   justify-content: center;

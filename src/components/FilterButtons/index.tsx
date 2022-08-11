@@ -1,7 +1,7 @@
 import theme from "@/config/theme";
+import { DetectPlatform } from "@/utils/detect-platform";
 import React from "react";
-import { Platform, View } from "react-native";
-import Button from "../Button";
+import { Button } from "../Button";
 
 import { Container } from "./styles";
 
@@ -19,14 +19,12 @@ export const FilterButtons: React.FC<FilterButtonsProps> = ({
       <Button
         onPress={onClear}
         style={{ width: "50%", marginRight: 15 }}
-        backgroundColor={
-          Platform.OS === "ios" ? theme.colors.grey["300"] : theme.colors.white
-        }
+        backgroundColor={DetectPlatform(
+          theme.colors.grey["300"],
+          theme.colors.white
+        )}
         textProps={{
-          color:
-            Platform.OS === "ios"
-              ? theme.colors.text
-              : theme.colors.grey["900"],
+          color: DetectPlatform(theme.colors.text, theme.colors.grey["900"]),
         }}
       >
         Reset
@@ -34,14 +32,12 @@ export const FilterButtons: React.FC<FilterButtonsProps> = ({
       <Button
         onPress={onFilter}
         style={{ width: "50%" }}
-        backgroundColor={
-          Platform.OS === "ios" ? theme.colors.secondary : theme.colors.white
-        }
+        backgroundColor={DetectPlatform(
+          theme.colors.secondary,
+          theme.colors.white
+        )}
         textProps={{
-          color:
-            Platform.OS === "ios"
-              ? theme.colors.white
-              : theme.colors.grey["900"],
+          color: DetectPlatform(theme.colors.white, theme.colors.grey["900"]),
         }}
       >
         Apply

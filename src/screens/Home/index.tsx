@@ -1,14 +1,12 @@
-import { FightersList } from "@/components/FightersList";
-import { Header } from "@/components/Header";
+import { FightersList, Header } from "@/components";
 import { AppNavigatorParamList } from "@/navigators/AppNavigator/app-navigator-param-list";
 import { FighterService } from "@/services/FighterService";
 import { UniverseService } from "@/services/UniverseService";
 import { RootState } from "@/store";
-import { Fighter } from "@/types/Fighter";
-import { Universe } from "@/types/Universe";
+import { Fighter, Universe } from "@/types";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Alert, Platform } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useSelector } from "react-redux";

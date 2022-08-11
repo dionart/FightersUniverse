@@ -12,7 +12,7 @@ interface ButtonComponentProps extends TouchableOpacityProps {
   style?: StyleProp<ViewStyle>;
 }
 
-const Button: React.FC<ButtonComponentProps> = ({
+export const Button: React.FC<ButtonComponentProps> = ({
   children,
   backgroundColor,
   onPress,
@@ -30,5 +30,3 @@ const Button: React.FC<ButtonComponentProps> = ({
     </Container>
   );
 };
-
-export default Button;

@@ -6,18 +6,11 @@ import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import React, { useCallback } from "react";
 import { FlatList, RefreshControl } from "react-native";
-import FastImage from "react-native-fast-image";
-import { Box } from "../Box";
-import Slider from "../Slider";
+import { FighterItem } from "../FighterItem";
+import { Slider } from "../Slider";
 import { Text } from "../Text";
 
-import {
-  Container,
-  FighterImage,
-  FighterItem,
-  Row,
-  SliderContainer,
-} from "./styles";
+import { Container, EmptyContainer, SliderContainer } from "./styles";
 
 interface FightersListProps {
   universe: Universe[];
@@ -40,38 +33,7 @@ export const FightersList: React.FC<FightersListProps> = ({
   };
 
   const renderItem = (item: Fighter) => {
-    return (
-      <FighterItem onPress={() => handlePress(item)}>
-        <Row>
-          <FighterImage
-            source={{
-              uri: item.imageURL,
-              priority: FastImage.priority.normal,
-            }}
-            resizeMode={FastImage.resizeMode.contain}
-          />
-          <Box marginLeft={13}>
-            <Text weight="bold" size={16} color={theme.colors.grey["900"]}>
-              {item.name}
-            </Text>
-            <Text color={theme.colors.grey["700"]} size={14}>
-              {item.universe}
-            </Text>
-          </Box>
-        </Row>
-        <Box>
-          <Text align="right" color={theme.colors.grey["700"]} size={14}>
-            Price: {item.price}
-          </Text>
-          <Text align="right" color={theme.colors.grey["700"]} size={14}>
-            Rate: {item.rate}
-          </Text>
-          <Text align="right" color={theme.colors.grey["700"]} size={14}>
-            Downloads: {item.downloads}
-          </Text>
-        </Box>
-      </FighterItem>
-    );
+    return <FighterItem fighter={item} onPress={() => handlePress(item)} />;
   };
 
   const renderHeader = () => (
@@ -79,6 +41,16 @@ export const FightersList: React.FC<FightersListProps> = ({
       <Slider data={universe} />
     </SliderContainer>
   );
+
+  const renderEmpty = () => {
+    return (
+      <EmptyContainer>
+        <Text weight="regular" color={theme.colors.grey["600"]} size={16}>
+          No fighters were found :(
+        </Text>
+      </EmptyContainer>
+    );
+  };
 
   const flatListOptimizationProps = {
     initialNumToRender: 6,
@@ -91,6 +63,8 @@ export const FightersList: React.FC<FightersListProps> = ({
     <Container>
       <FlatList
         ListHeaderComponent={renderHeader()}
+        ListEmptyComponent={renderEmpty()}
+        contentContainerStyle={{ flex: 1 }}
         refreshControl={
           <RefreshControl
             colors={[theme.colors.grey["400"]]}
