@@ -91,7 +91,7 @@ export const Home: React.FC = () => {
         setFighters(response);
       })
       .catch((error) => {
-        console.log(Object.entries(error));
+        Alert.alert("Error", error.message);
       })
       .finally(() => {
         setLoading(false);
