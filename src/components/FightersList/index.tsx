@@ -64,7 +64,7 @@ export const FightersList: React.FC<FightersListProps> = ({
       <FlatList
         ListHeaderComponent={renderHeader()}
         ListEmptyComponent={renderEmpty()}
-        contentContainerStyle={{ flex: 1 }}
+        contentContainerStyle={{ flexGrow: 1 }}
         refreshControl={
           <RefreshControl
             colors={[theme.colors.grey["400"]]}
