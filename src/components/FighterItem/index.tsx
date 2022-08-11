@@ -6,7 +6,12 @@ import { Box } from "../Box";
 import { Row } from "../Row";
 import { Text } from "../Text";
 
-import { Container, FighterImage } from "./styles";
+import {
+  Container,
+  FighterImage,
+  FighterMainInfo,
+  TextContainer,
+} from "./styles";
 
 interface FighterItemProps {
   fighter: Fighter;
@@ -18,7 +23,7 @@ export const FighterItem: React.FC<FighterItemProps> = ({
   onPress,
 }) => (
   <Container onPress={onPress}>
-    <Row center>
+    <FighterMainInfo>
       <FighterImage
         source={{
           uri: fighter.imageURL,
@@ -26,15 +31,15 @@ export const FighterItem: React.FC<FighterItemProps> = ({
         }}
         resizeMode={FastImage.resizeMode.contain}
       />
-      <Box marginLeft={13}>
+      <TextContainer>
         <Text weight="bold" size={16} color={theme.colors.grey["900"]}>
           {fighter.name}
         </Text>
         <Text weight="regular" color={theme.colors.grey["700"]} size={14}>
           {fighter.universe}
         </Text>
-      </Box>
-    </Row>
+      </TextContainer>
+    </FighterMainInfo>
     <Box>
       <Text
         weight="regular"

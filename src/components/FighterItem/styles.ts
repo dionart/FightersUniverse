@@ -16,3 +16,14 @@ export const FighterImage = styled(FastImage)`
   width: ${s(73)}px;
   height: ${s(73)}px;
 `;
+
+export const TextContainer = styled.View`
+  flex: 1;
+  margin-left: ${s(13)}px;
+`;
+
+export const FighterMainInfo = styled.View`
+  flex-direction: row;
+  align-items: center;
+  width: 60%;
+`;
