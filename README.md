@@ -56,11 +56,11 @@ Obs: In case you don't have your environment configured to run an emulator [clic
 
 ## 🤖 APK
 
-APK available [click here](https://drive.google.com/file/d/1nVahUTMQeNwLtA5sjZ3Ya2imt2XswcE1/view?usp=sharing)
+APK available [click here](https://drive.google.com/file/d/1eRFahw48ekvl-QE1QqrUJWZn7OxuaAHA/view?usp=sharing)
 
 ## :memo: License
 
-This project is under MIT license. Check the license file [LICENSE](LICENSE.md) for more details.
+This project is under MIT license. Check the license file [LICENSE](LICENSE) for more details.
 
 ---
 
