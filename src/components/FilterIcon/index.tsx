@@ -14,7 +14,7 @@ export const FilterIcon: React.FC<FilterIconProps> = ({
 }) => {
   return (
     <TouchableOpacity onPress={onPress}>
-      <Svg width="21" height="14" viewBox="0 0 21 14" fill="none">
+      <Svg width="21" height="21" viewBox="0 0 21 14" fill="none">
         <Path
           fill-rule="evenodd"
           clip-rule="evenodd"
