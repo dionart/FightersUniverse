@@ -13,8 +13,8 @@ import { FighterDetails, Filters, Home, Onboarding } from "@/screens";
 const Stack = createNativeStackNavigator<AppNavigatorParamList>();
 
 export const AppNavigator = () => {
-  const activeFilter = useSelector(
-    (state: RootState) => state.app.currentFilter
+  const { currentFilter, rateFilterValue } = useSelector(
+    (state: RootState) => state.app
   );
 
   return (
@@ -41,7 +41,9 @@ export const AppNavigator = () => {
                 <FilterIcon
                   onPress={() => navigation.navigate("Filters")}
                   fillColor={
-                    activeFilter ? theme.colors.primary : theme.colors.white
+                    currentFilter || rateFilterValue
+                      ? theme.colors.primary
+                      : theme.colors.white
                   }
                 />
               ),

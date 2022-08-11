@@ -24,12 +24,14 @@ export const Header: React.FC<HeaderProps> = ({
   canGoBack = true,
   hasFilter = false,
 }) => {
-  const activeFilter = useSelector(
-    (state: RootState) => state.app.currentFilter
+  const { currentFilter, rateFilterValue } = useSelector(
+    (state: RootState) => state.app
   );
 
   const handleFilterIconColor = () => {
-    return activeFilter ? theme.colors.blue["300"] : theme.colors.grey["500"];
+    return currentFilter || rateFilterValue
+      ? theme.colors.blue["300"]
+      : theme.colors.grey["500"];
   };
 
   return (
